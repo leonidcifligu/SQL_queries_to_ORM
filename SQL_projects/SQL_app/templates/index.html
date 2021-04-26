@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users with templates</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
+</head>
+<body>
+    <div class="conteiner" style="padding: 30px;">
+        <h1 class="all-users" style="text-align: center; text-decoration: underline;">All the Users</h1><br>
+        <table class="table" style="width:100%">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.first_name}} {{users.last_name}} </td>
+                <td>{{user.email}}</td>
+                <td>{{user.age}}</td>
+            </tr>
+            {% endfor %}
+          </table><br>
+          <h1 class="add_user" style="text-align: center; text-decoration: underline;">Add User</h1>
+           <form action="/insert" method="post" style="display: flex;flex-direction: column; text-align: center;">
+               {% csrf_token %}
+                <h3>First Name : <input type="text" name="first_name"></h3>
+                <h3>Last Name : <input type="text" name="last_name"></h3>
+                <h3>Email : <input type="email" name="email"></h3>
+                <h3>Age : <input type="number" name="age"></h3>
+
+                <button type="submit">Insert data</button>
+            </form>
+    </div>
+</body>
+</html>
